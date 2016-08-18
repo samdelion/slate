@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Draygon Tensor Lua API Documentation</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;lua&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,7 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="lua">Lua</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,235 +110,1614 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/samdelion/DraygonTensor'>Source</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        
+          <h1 id="lua-api">Lua API</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+          <h1 id="gt-vector3">&gt; Vector3</h1>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
-
-<h1 id="authentication">Authentication</h1>
-
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<h2 id="vector3">Vector3</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">wishDir</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all kittens.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
+<p><code class="prettyprint">Vector3 Vector3(number x, number y, number z)</code></p>
 
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>x</td>
+<td>number</td>
+<td>x-component of Vector3.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>y</td>
+<td>number</td>
+<td>y-component of Vector3.</td>
+</tr>
+<tr>
+<td>z</td>
+<td>number</td>
+<td>z-component of Vector3.</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+<p>Construct a Vector3 from the given components.</p>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<h2 id="vector3-new-number-x-number-y-number-z">Vector3.new(number x, number y, number z)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">wishDir</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
+<p><code class="prettyprint">Vector3 Vector3.new(number x, number y, number z)</code></p>
 
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>x</td>
+<td>number</td>
+<td>x-component of Vector3.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>number</td>
+<td>y-component of Vector3.</td>
+</tr>
+<tr>
+<td>z</td>
+<td>number</td>
+<td>z-component of Vector3.</td>
 </tr>
 </tbody></table>
 
-          <h1 id="errors">Errors</h1>
+<p>Construct a Vector3 from the given components.</p>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<h2 id="vector3-magnitude-vector3-v">Vector3.magnitude(Vector3 v)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">wishDir</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">magnitude</span><span class="p">(</span><span class="n">wishDir</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s2">"Do stuff"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
 
-<p>The Kittn API uses the following error codes:</p>
+<p><code class="prettyprint">number Vector3.magnitude(Vector3 v)</code></p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>v</td>
+<td>Vector3</td>
+<td>Vector3 to find magnitude of.</td>
 </tr>
 </tbody></table>
+
+<p>Return the magnitude of the given Vector3.</p>
+
+<h2 id="vector3-normalize-vector3-v">Vector3.normalize(Vector3 v)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">wishDir</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">wishDir</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">wishDir</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3 Vector3.normalize(Vector3 v)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v</td>
+<td>Vector3</td>
+<td>Vector3 to normalize.</td>
+</tr>
+</tbody></table>
+
+<p>Return a normalized version of the given Vector3.</p>
+
+<h2 id="vector3-invert-vector3-v">Vector3.invert(Vector3 v)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span> <span class="c1">-- {1, 0, 1}</span>
+<span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">invert</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span> <span class="c1">-- {-1, 0, -1}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3 Vector3.invert(Vector3 v)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v</td>
+<td>Vector3</td>
+<td>Vector3 to invert.</td>
+</tr>
+</tbody></table>
+
+<p>Return an inverted version of the given Vector3.</p>
+
+<h2 id="vector3-dot-vector3-v1-vector3-v2">Vector3.dot(Vector3 v1, Vector3 v2)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">dot</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span> <span class="c1">-- 1 </span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector3.dot(Vector3 v1, Vector3 v2)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v1</td>
+<td>Vector3</td>
+<td>Vector3 to dot product.</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>Vector3</td>
+<td>Vector3 to dot product.</td>
+</tr>
+</tbody></table>
+
+<p>Return the dot product of the two given vectors.</p>
+
+<h2 id="vector3-cross-vector3-v1-vector3-v2">Vector3.cross(Vector3 v1, Vector3 v2)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">cross</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span> <span class="c1">-- {0, 0, 1}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3 Vector3.cross(Vector3 v1, Vector3 v2)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v1</td>
+<td>Vector3</td>
+<td>Vector3 to cross product.</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>Vector3</td>
+<td>Vector3 to cross product.</td>
+</tr>
+</tbody></table>
+
+<p>Return the cross product of the two given vectors.</p>
+
+<h2 id="vector3-transform-vector3-v-matrix4-m">Vector3.transform(Vector3 v, Matrix4 m)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vecTransformed</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">myVec</span><span class="p">,</span> <span class="n">myMatrix</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v</td>
+<td>Vector3</td>
+<td>Vector3 to transform.</td>
+</tr>
+<tr>
+<td>m</td>
+<td>Matrix4</td>
+<td>Matrix4 to transform Vector3 by.</td>
+</tr>
+</tbody></table>
+
+<p>Return a Vector3 equal to the given Vector3 transformed by the given Matrix4.</p>
+
+<h2 id="vector3-unit_x">Vector3.unit_x()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">unitX</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">unit_x</span><span class="p">()</span> <span class="c1">-- {1, 0, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3 Vector3.unit_x()</code></p>
+
+<p>Return a Vector3 of magnitude 1 in the x-direction.</p>
+
+<h2 id="vector3-unit_y">Vector3.unit_y()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">unitY</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">unit_y</span><span class="p">()</span> <span class="c1">-- {0, 1, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3 Vector3.unit_y()</code></p>
+
+<p>Return a Vector3 of magnitude 1 in the y-direction.</p>
+
+<h2 id="vector3-unit_z">Vector3.unit_z()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">unitZ</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">unit_z</span><span class="p">()</span> <span class="c1">-- {0, 0, 1}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3 Vector3.unit_z()</code></p>
+
+<p>Return a Vector3 of magnitude 1 in the z-direction.</p>
+
+<h2 id="vector3-get_x">Vector3:get_x()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">x</span> <span class="o">=</span> <span class="n">vec</span><span class="p">:</span><span class="n">get_x</span><span class="p">();</span> <span class="c1">-- 3.14159</span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector3:get_x()</code></p>
+
+<p>Return the x component of the given Vector3.</p>
+
+<h2 id="vector3-get_y">Vector3:get_y()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">y</span> <span class="o">=</span> <span class="n">vec</span><span class="p">:</span><span class="n">get_y</span><span class="p">();</span> <span class="c1">-- 3.14159</span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector3:get_y()</code></p>
+
+<p>Return the y component of the given Vector3.</p>
+
+<h2 id="vector3-get_z">Vector3:get_z()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">z</span> <span class="o">=</span> <span class="n">vec</span><span class="p">:</span><span class="n">get_z</span><span class="p">();</span> <span class="c1">-- 3.14159</span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector3:get_z()</code></p>
+
+<p>Return the z component of the given Vector3.</p>
+
+<h2 id="vector3-set_x">Vector3:set_x()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">-- {0, 0, 0}</span>
+<span class="n">vec</span><span class="p">:</span><span class="n">set_x</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">);</span> <span class="c1">-- {3.14159, 0, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3:set_x(number x)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>number</td>
+<td>Value to given to x component of given Vector3.</td>
+</tr>
+</tbody></table>
+
+<p>Set the x component of the given Vector3 to the given value.</p>
+
+<h2 id="vector3-set_y">Vector3:set_y()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">-- {0, 0, 0}</span>
+<span class="n">vec</span><span class="p">:</span><span class="n">set_y</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">);</span> <span class="c1">-- {0, 3.14159, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3:set_y(number y)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>y</td>
+<td>number</td>
+<td>Value to given to y component of given Vector3.</td>
+</tr>
+</tbody></table>
+
+<p>Set the y component of the given Vector3 to the given value.</p>
+
+<h2 id="vector3-set_z">Vector3:set_z()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">-- {0, 0, 0}</span>
+<span class="n">vec</span><span class="p">:</span><span class="n">set_z</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">);</span> <span class="c1">-- {0, 0, 3.14159}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector3:set_z(number z)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Tzpe</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>z</td>
+<td>number</td>
+<td>Value to given to z component of given Vector3.</td>
+</tr>
+</tbody></table>
+
+<p>Set the z component of the given Vector3 to the given value.</p>
+
+          <h1 id="gt-vector4">&gt; Vector4</h1>
+
+<h2 id="vector4">Vector4</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4 Vector4(number x, number y, number z, number w)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>number</td>
+<td>x component of Vector4.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>number</td>
+<td>y component of Vector4.</td>
+</tr>
+<tr>
+<td>z</td>
+<td>number</td>
+<td>z component of Vector4.</td>
+</tr>
+<tr>
+<td>w</td>
+<td>number</td>
+<td>w component of Vector4.</td>
+</tr>
+</tbody></table>
+
+<p>Construct a Vector4 from the given components.</p>
+
+<h2 id="vector4-new-number-x-number-y-number-z-number-w">Vector4.new(number x, number y, number z, number w)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4 Vector4.new(number x, number y, number z, number w)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>number</td>
+<td>x component of Vector4.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>number</td>
+<td>y component of Vector4.</td>
+</tr>
+<tr>
+<td>z</td>
+<td>number</td>
+<td>z component of Vector4.</td>
+</tr>
+<tr>
+<td>w</td>
+<td>number</td>
+<td>w component of Vector4.</td>
+</tr>
+</tbody></table>
+
+<p>Construct a Vector4 from the given components.</p>
+
+<h2 id="vector4-magnitude-vector4-v">Vector4.magnitude(Vector4 v)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">wishDir</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">Vector4</span><span class="p">.</span><span class="n">magnitude</span><span class="p">(</span><span class="n">wishDir</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s2">"Do stuff"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector4.magnitude(Vector4 v)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v</td>
+<td>Vector4</td>
+<td>Vector4 to find magnitude of.</td>
+</tr>
+</tbody></table>
+
+<p>Return the magnitude of the given Vector4.</p>
+
+<h2 id="vector4-normalize-vector4-v">Vector4.normalize(Vector4 v)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">wishDir</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">wishDir</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">wishDir</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4 Vector4.normalize(Vector4 v)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v</td>
+<td>Vector4</td>
+<td>Vector4 to normalize.</td>
+</tr>
+</tbody></table>
+
+<p>Return a normalized version of the given Vector4.</p>
+
+<h2 id="vector4-invert-vector4-v">Vector4.invert(Vector4 v)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span> <span class="c1">-- {1, 0, 1, 1}</span>
+<span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">invert</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span> <span class="c1">-- {-1, 0, -1, -1}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4 Vector4.invert(Vector4 v)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v</td>
+<td>Vector4</td>
+<td>Vector4 to invert.</td>
+</tr>
+</tbody></table>
+
+<p>Return an inverted version of the given Vector4.</p>
+
+<h2 id="vector4-dot-vector4-v1-vector4-v2">Vector4.dot(Vector4 v1, Vector4 v2)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">dot</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span> <span class="c1">-- 2 </span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector4.dot(Vector4 v1, Vector4 v2)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v1</td>
+<td>Vector4</td>
+<td>Vector4 to dot product.</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>Vector4</td>
+<td>Vector4 to dot product.</td>
+</tr>
+</tbody></table>
+
+<p>Return the dot product of the two given vectors.</p>
+
+<h2 id="vector4-transform-vector4-v-matrix4-m">Vector4.transform(Vector4 v, Matrix4 m)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vecTransformed</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">myVec</span><span class="p">,</span> <span class="n">myMatrix</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>v</td>
+<td>Vector4</td>
+<td>Vector4 to transform.</td>
+</tr>
+<tr>
+<td>m</td>
+<td>Matrix4</td>
+<td>Matrix4 to transform Vector4 by.</td>
+</tr>
+</tbody></table>
+
+<p>Return a Vector4 equal to the given Vector4 transformed by the given Matrix4.</p>
+
+<h2 id="vector4-unit_x">Vector4.unit_x()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">unitX</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">unit_x</span><span class="p">()</span> <span class="c1">-- {1, 0, 0, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4 Vector4.unit_x()</code></p>
+
+<p>Return a Vector4 of magnitude 1 in the x-direction.</p>
+
+<h2 id="vector4-unit_y">Vector4.unit_y()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">unitY</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">unit_y</span><span class="p">()</span> <span class="c1">-- {0, 1, 0, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4 Vector4.unit_y()</code></p>
+
+<p>Return a Vector4 of magnitude 1 in the y-direction.</p>
+
+<h2 id="vector4-unit_z">Vector4.unit_z()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">unitZ</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">unit_z</span><span class="p">()</span> <span class="c1">-- {0, 0, 1, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4 Vector4.unit_z()</code></p>
+
+<p>Return a Vector4 of magnitude 1 in the z-direction.</p>
+
+<h2 id="vector4-unit_w">Vector4.unit_w()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">unitW</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">.</span><span class="n">unit_w</span><span class="p">()</span> <span class="c1">-- {0, 0, 1, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4 Vector4.unit_w()</code></p>
+
+<p>Return a Vector4 of magnitude 1 in the w-direction.</p>
+
+<h2 id="vector4-get_x">Vector4:get_x()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">x</span> <span class="o">=</span> <span class="n">vec</span><span class="p">:</span><span class="n">get_x</span><span class="p">();</span> <span class="c1">-- 3.14159</span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector4:get_x()</code></p>
+
+<p>Return the x component of the given Vector4.</p>
+
+<h2 id="vector4-get_y">Vector4:get_y()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">y</span> <span class="o">=</span> <span class="n">vec</span><span class="p">:</span><span class="n">get_y</span><span class="p">();</span> <span class="c1">-- 3.14159</span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector4:get_y()</code></p>
+
+<p>Return the y component of the given Vector4.</p>
+
+<h2 id="vector4-get_z">Vector4:get_z()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">z</span> <span class="o">=</span> <span class="n">vec</span><span class="p">:</span><span class="n">get_z</span><span class="p">();</span> <span class="c1">-- 3.14159</span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector4:get_z()</code></p>
+
+<p>Return the z component of the given Vector4.</p>
+
+<h2 id="vector4-get_w">Vector4:get_w()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">w</span> <span class="o">=</span> <span class="n">vec</span><span class="p">:</span><span class="n">get_w</span><span class="p">();</span> <span class="c1">-- 1 </span>
+</code></pre>
+
+<p><code class="prettyprint">number Vector4:get_w()</code></p>
+
+<p>Return the w component of the given Vector4.</p>
+
+<h2 id="vector4-set_x">Vector4:set_x()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">-- {0, 0, 0, 1}</span>
+<span class="n">vec</span><span class="p">:</span><span class="n">set_x</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">);</span> <span class="c1">-- {3.14159, 0, 0, 1}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4:set_x(number x)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>number</td>
+<td>Value to given to x component of given Vector4.</td>
+</tr>
+</tbody></table>
+
+<p>Set the x component of the given Vector4 to the given value.</p>
+
+<h2 id="vector4-set_y">Vector4:set_y()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">-- {0, 0, 0, 1}</span>
+<span class="n">vec</span><span class="p">:</span><span class="n">set_y</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">);</span> <span class="c1">-- {0, 3.14159, 0, 1}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4:set_y(number y)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>y</td>
+<td>number</td>
+<td>Value to given to y component of given Vector4.</td>
+</tr>
+</tbody></table>
+
+<p>Set the y component of the given Vector4 to the given value.</p>
+
+<h2 id="vector4-set_z">Vector4:set_z()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">-- {0, 0, 0, 1}</span>
+<span class="n">vec</span><span class="p">:</span><span class="n">set_z</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">);</span> <span class="c1">-- {0, 0, 3.14159, 1}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4:set_z(number z)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Tzpe</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>z</td>
+<td>number</td>
+<td>Value to given to z component of given Vector4.</td>
+</tr>
+</tbody></table>
+
+<p>Set the z component of the given Vector4 to the given value.</p>
+
+<h2 id="vector4-set_w">Vector4:set_w()</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">-- {0, 0, 0, 1}</span>
+<span class="n">vec</span><span class="p">:</span><span class="n">set_w</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">14159</span><span class="p">);</span> <span class="c1">-- {0, 0, 0, 3.14159}</span>
+</code></pre>
+
+<p><code class="prettyprint">Vector4:set_w(number w)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Twpe</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>w</td>
+<td>number</td>
+<td>Value to given to w component of given Vector4.</td>
+</tr>
+</tbody></table>
+
+<p>Set the w component of the given Vector4 to the given value.</p>
+
+          <h1 id="gt-quaternion">&gt; Quaternion</h1>
+
+<h2 id="quaternion">Quaternion</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">quat</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">Quaternion Quaternion(number x, number y, number z, number w)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>number</td>
+<td>x component of Quaternion.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>number</td>
+<td>y component of Quaternion.</td>
+</tr>
+<tr>
+<td>z</td>
+<td>number</td>
+<td>z component of Quaternion.</td>
+</tr>
+<tr>
+<td>w</td>
+<td>number</td>
+<td>w component of Quaternion.</td>
+</tr>
+</tbody></table>
+
+<p>Construct a Quaternion from the given components.</p>
+
+<h2 id="quaternion-new-number-x-number-y-number-z-number-w">Quaternion.new(number x, number y, number z, number w)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">quat</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">Quaternion Quaternion(number x, number y, number z, number w)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>number</td>
+<td>x component of Quaternion.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>number</td>
+<td>y component of Quaternion.</td>
+</tr>
+<tr>
+<td>z</td>
+<td>number</td>
+<td>z component of Quaternion.</td>
+</tr>
+<tr>
+<td>w</td>
+<td>number</td>
+<td>w component of Quaternion.</td>
+</tr>
+</tbody></table>
+
+<p>Construct a Quaternion from the given components.</p>
+
+<h2 id="quaternion-create_from_axis_angle-vector3-axis-number-angleradians">Quaternion.create_from_axis_angle(Vector3 axis, number angleRadians)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">angle</span> <span class="o">=</span> <span class="nb">math.pi</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span> 
+<span class="kd">local</span> <span class="n">quat</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">create_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">Quaternion Quaternion.create_from_axis_angle(Vector3 axis, number angleRadians)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>axis</td>
+<td>Vector3</td>
+<td>Axis of Quaternion.</td>
+</tr>
+<tr>
+<td>angle</td>
+<td>number</td>
+<td>Angle of Quaternion.</td>
+</tr>
+</tbody></table>
+
+<p>Return a Quaternion constructed from the given axis and angle.</p>
+
+<h2 id="quaternion-magnitude-quaternion-q">Quaternion.magnitude(Quaternion q)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">quat</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Quaternion</span><span class="p">.</span><span class="n">magnitude</span><span class="p">(</span><span class="n">quat</span><span class="p">));</span> <span class="c1">-- 1</span>
+</code></pre>
+
+<p><code class="prettyprint">number Quaternion.magnitude(Quaternion q)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>q</td>
+<td>Quaternion</td>
+<td>Quaternion to get magnitude of.</td>
+</tr>
+</tbody></table>
+
+<p>Return the magnitude of the given Quaternion.</p>
+
+<h2 id="quaternion-normalize-quaternion-q">Quaternion.normalize(Quaternion q)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">quat</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Quaternion</span><span class="p">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">quat</span><span class="p">));</span> <span class="c1">-- {1, 0, 0, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Quaternion Quaternion.normalize(Quaternion q)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>q</td>
+<td>Quaternion</td>
+<td>Quaternion to get normalized version of.</td>
+</tr>
+</tbody></table>
+
+<p>Returns a normalized version of the given Quaternion.</p>
+
+<h2 id="quaternion-invert-quaternion-q">Quaternion.invert(Quaternion q)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">quat</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Quaternion</span><span class="p">.</span><span class="n">invert</span><span class="p">(</span><span class="n">quat</span><span class="p">));</span> <span class="c1">-- {-2, 0, 0, 0}</span>
+</code></pre>
+
+<p><code class="prettyprint">Quaternion Quaternion.invert(Quaternion q)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>q</td>
+<td>Quaternion</td>
+<td>Quaternion to get inverted version of.</td>
+</tr>
+</tbody></table>
+
+<p>Returns an inverted version of the given Quaternion.</p>
+
+<h2 id="quaternion-dot-quaternion-q1-quaternion-q2">Quaternion.dot(Quaternion q1, Quaternion q2)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">q2</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">number</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">number Quaternion.dot(Quaternion q1, Quaternion q2)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>q1</td>
+<td>Quaternion</td>
+<td>Quaternion get dot product of.</td>
+</tr>
+<tr>
+<td>q2</td>
+<td>Quaternion</td>
+<td>Quaternion get dot product of.</td>
+</tr>
+</tbody></table>
+
+<p>Returns the dot product of the two given Quaternions.</p>
+
+          <h1 id="gt-matrix4">&gt; Matrix4</h1>
+
+<h2 id="matrix4">Matrix4</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">Matrix4</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span> <span class="c1">-- identity matrix</span>
+</code></pre>
+
+<p><code class="prettyprint">Matrix4 Matrix4(number leading)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leading</td>
+<td>number</td>
+<td>Number to have along leading diagonal of Matrix4.</td>
+</tr>
+</tbody></table>
+
+<p>Construct a diagonal Matrix4 with the leading edge filled with the given number.</p>
+
+<h2 id="matrix4-create_translation_matrix-vector3-translation">Matrix4.create_translation_matrix(Vector3 translation)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">translationMatrix</span> <span class="o">=</span> <span class="n">Matrix4</span><span class="p">.</span><span class="n">create_translation_matrix</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">));</span>
+</code></pre>
+
+<p><code class="prettyprint">Matrix4 Matrix4.create_translation_matrix(Vector3 translation)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>translation</td>
+<td>Vector3</td>
+<td>Translation to get.</td>
+</tr>
+</tbody></table>
+
+<p>Create a Matrix4 representing a translation transformation.</p>
+
+<h2 id="matrix4-create_scale_matrix-vector3-scale">Matrix4.create_scale_matrix(Vector3 scale)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">scaleMatrix</span> <span class="o">=</span> <span class="n">Matrix4</span><span class="p">.</span><span class="n">create_scale_matrix</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">));</span>
+</code></pre>
+
+<p><code class="prettyprint">Matrix4 Matrix4.create_scale_matrix(Vector3 scale)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scale</td>
+<td>Vector3</td>
+<td>Scale to get.</td>
+</tr>
+</tbody></table>
+
+<p>Create a Matrix4 representing a scale transformation.</p>
+
+<h2 id="matrix4-create_from_quaternion-quaternion-rotation">Matrix4.create_from_quaternion(Quaternion rotation)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">myQuat</span> <span class="o">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">create_from_axis_angle</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nb">math.pi</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="kd">local</span> <span class="n">rotation</span> <span class="o">=</span> <span class="n">Matrix4</span><span class="p">.</span><span class="n">create_from_quaternion</span><span class="p">(</span><span class="n">myQuat</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">Matrix4 Matrix4.create_from_quaternion(Quaternion rotation)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rotation</td>
+<td>Quaternion</td>
+<td>Rotation to get.</td>
+</tr>
+</tbody></table>
+
+<p>Create a Matrix4 representing a rotation transformation.</p>
+
+<h2 id="matrix4-transpose-matrix4-mat">Matrix4.transpose(Matrix4 mat)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">Matrix4</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span> <span class="c1">-- identity matrix</span>
+<span class="kd">local</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">Matrix4</span><span class="p">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">mat</span><span class="p">);</span> <span class="c1">-- identity matrix</span>
+</code></pre>
+
+<p><code class="prettyprint">Matrix4 Matrix4.transpose(Matrix4 mat)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mat</td>
+<td>Matrix4</td>
+<td>Matrix4 to transpose.</td>
+</tr>
+</tbody></table>
+
+<p>Returns a transposed (swapped rows and columns) version of the given Matrix4.</p>
+
+<h2 id="matrix4-inverse-matrix4-mat">Matrix4.inverse(Matrix4 mat)</h2>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">Matrix4</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span> <span class="c1">-- identity matrix</span>
+<span class="kd">local</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">Matrix4</span><span class="p">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">mat</span><span class="p">);</span> <span class="c1">-- identity matrix</span>
+</code></pre>
+
+<p><code class="prettyprint">Matrix4 Matrix4.inverse(Matrix4 mat)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mat</td>
+<td>Matrix4</td>
+<td>Matrix4 to return inverse of.</td>
+</tr>
+</tbody></table>
+
+<p>Returns a matrix-inversed version of the given Matrix4.</p>
+
+          <h1 id="gt-script">&gt; Script</h1>
+
+<h2 id="script-spawn_prefab">Script.spawn_prefab</h2>
+<pre class="highlight lua"><code><span class="n">camera</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">spawn_prefab</span><span class="p">(</span><span class="s2">"player"</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</code></pre>
+
+<p><code class="prettyprint">Entity Script.spawn_prefab(string prefabPath, Vector3 position)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>prefabPath</td>
+<td>string</td>
+<td>Path to prefab file to spawn in, excluding .prefab suffix.</td>
+</tr>
+<tr>
+<td>position</td>
+<td>Vector3</td>
+<td>Position to spawn prefab at.</td>
+</tr>
+</tbody></table>
+
+<p>Create an entity from the given prefab at the given position.</p>
+
+<h2 id="script-is_next_message">Script.is_next_message()</h2>
+<pre class="highlight lua"><code><span class="k">if</span> <span class="p">(</span><span class="n">Script</span><span class="p">.</span><span class="n">is_next_message</span><span class="p">())</span> <span class="k">then</span>
+  <span class="kd">local</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">next_message</span><span class="p">()</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><code class="prettyprint">bool Script.is_next_message()</code></p>
+
+<p>Returns true if a new message is available for the Lua script and false otherwise.</p>
+
+<h2 id="script-next_message">Script.next_message()</h2>
+<pre class="highlight lua"><code><span class="k">if</span> <span class="p">(</span><span class="n">Script</span><span class="p">.</span><span class="n">is_next_message</span><span class="p">())</span> <span class="k">then</span>
+  <span class="kd">local</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">next_message</span><span class="p">()</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><code class="prettyprint">table Script.next_message()</code></p>
+
+<p>Returns a table with the message contents.</p>
+
+<h2 id="script-get_world_transform-entity-entity">Script.get_world_transform(Entity entity)</h2>
+
+<p><code class="prettyprint">Matrix4 Script.get_world_transform(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">myEntity</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">spawn_prefab</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+<span class="kd">local</span> <span class="n">worldTransform</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">get_world_transform</span><span class="p">(</span><span class="n">myEntity</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to get world transform of.</td>
+</tr>
+</tbody></table>
+
+<p>Get the world transform of a given entity.</p>
+
+<h2 id="script-get_local_transform-entity-entity">Script.get_local_transform(Entity entity)</h2>
+
+<p><code class="prettyprint">Matrix4 Script.get_local_transform(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">myEntity</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">spawn_prefab</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+<span class="kd">local</span> <span class="n">localTransform</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">get_local_transform</span><span class="p">(</span><span class="n">myEntity</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to get local transform of.</td>
+</tr>
+</tbody></table>
+
+<p>Get the local transform (transform relative to parent) of a given entity.</p>
+
+<h2 id="script-set_entity_animation_index-entity-entity-number-animationindex">Script.set_entity_animation_index(Entity entity, number animationIndex)</h2>
+
+<p><code class="prettyprint">Script.set_entity_animation_index(Entity entity, number animationIndex)</code></p>
+<pre class="highlight lua"><code><span class="n">Script</span><span class="p">.</span><span class="n">set_entity_animation_index</span><span class="p">(</span><span class="n">myEntity</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to set animation index of.</td>
+</tr>
+<tr>
+<td>animationIndex</td>
+<td>number</td>
+<td>Index of animation to play.</td>
+</tr>
+</tbody></table>
+
+<p>Set the animation that is currently playing for a given entity.</p>
+
+<h2 id="script-set_skybox_material-string-skyboxmaterialpath">Script.set_skybox_material(string skyboxMaterialPath)</h2>
+
+<p><code class="prettyprint">Script.set_skybox_material(string skyboxMaterialPath)</code>
+<code class="prettyprint">lua
+Script.set_skybox_material(&quot;skyDome01.material&quot;);
+</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>skyboxMaterialPath</td>
+<td>string</td>
+<td>Path to material to render skybox with.</td>
+</tr>
+</tbody></table>
+
+<p>Set the material the skybox is currently being rendered with. </p>
+
+<h2 id="script-create_gui_panel-number-startx-number-starty-number-endx-number-endy-string-materialpath">Script.create_gui_panel(number startX, number startY, number endX, number endY, string materialPath)</h2>
+
+<p><code class="prettyprint">Entity Script.create_gui_panel(number startX, number startY, number endX, number endY, string materialPath)</code></p>
+<pre class="highlight lua"><code><span class="n">guiStartTitlePanel</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">create_gui_panel</span><span class="p">(</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"menuTitlePanel.material"</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startX</td>
+<td>number</td>
+<td>Start x-coordinate of the panel.</td>
+</tr>
+<tr>
+<td>startY</td>
+<td>number</td>
+<td>Start y-coordinate of the panel.</td>
+</tr>
+<tr>
+<td>endX</td>
+<td>number</td>
+<td>End x-coordinate of the panel.</td>
+</tr>
+<tr>
+<td>endY</td>
+<td>number</td>
+<td>End y-coordinate of the panel.</td>
+</tr>
+<tr>
+<td>materialPath</td>
+<td>string</td>
+<td>Path to material to render panel with.</td>
+</tr>
+</tbody></table>
+
+<p>Creates a panel (just a non-interactive, 2D UI element).</p>
+
+<h2 id="script-create_gui_button-number-startx-number-starty-number-endx-number-endy-string-defaultmaterialpath-string-pressedmaterialpath-string-hovermaterialpath">Script.create_gui_button(number startX, number startY, number endX, number endY, string defaultMaterialPath, string pressedMaterialPath, string hoverMaterialPath)</h2>
+
+<p><code class="prettyprint">Entity Script.create_gui_button(number startX, number startY, number endX, number endY, string defaultMaterialPath, string pressedMaterialPath, string hoverMaterialPath)</code></p>
+<pre class="highlight lua"><code><span class="n">guiToggleHardModeButton</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">create_gui_button</span><span class="p">(</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">40</span><span class="p">,</span>  <span class="s2">"s_difficulty_default.material"</span><span class="p">,</span> <span class="s2">"s_difficulty_pressed.material"</span><span class="p">,</span> <span class="s2">"s_difficulty_hover.material"</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startX</td>
+<td>number</td>
+<td>Start x-coordinate of the panel.</td>
+</tr>
+<tr>
+<td>startY</td>
+<td>number</td>
+<td>Start y-coordinate of the panel.</td>
+</tr>
+<tr>
+<td>endX</td>
+<td>number</td>
+<td>End x-coordinate of the panel.</td>
+</tr>
+<tr>
+<td>endY</td>
+<td>number</td>
+<td>End y-coordinate of the panel.</td>
+</tr>
+<tr>
+<td>defaultMaterialPath</td>
+<td>string</td>
+<td>Material to render with if button isn&rsquo;t pressed or hovered over.</td>
+</tr>
+<tr>
+<td>pressedMaterialPath</td>
+<td>string</td>
+<td>Material to render with if button is pressed.</td>
+</tr>
+<tr>
+<td>hoverMaterialPath</td>
+<td>string</td>
+<td>Material to render with if button is hovered over.</td>
+</tr>
+</tbody></table>
+
+<p>Creates a gui button that sends button press events.</p>
+
+<h2 id="script-get_local_translation-entity-entity">Script.get_local_translation(Entity entity)</h2>
+
+<p><code class="prettyprint">Vector3 Script.get_local_translation(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">chaserTranslate</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">get_local_translation</span><span class="p">(</span><span class="n">chaser</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to set the local translation of.</td>
+</tr>
+</tbody></table>
+
+<p>Get the local translation (translation relative to parent) of the given entity.</p>
+
+<h2 id="script-get_world_translation-entity-entity">Script.get_world_translation(Entity entity)</h2>
+
+<p><code class="prettyprint">Vector3 Script.get_world_translation(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">chaserWTranslate</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">get_world_translation</span><span class="p">(</span><span class="n">chaser</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to set the world translation of.</td>
+</tr>
+</tbody></table>
+
+<p>Get the world translation (translation relative to world coordinate system) of the given entity.</p>
+
+<h2 id="script-get_local_scale-entity-entity">Script.get_local_scale(Entity entity)</h2>
+
+<p><code class="prettyprint">Vector3 Script.get_local_scale(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">chaserScale</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">get_local_scale</span><span class="p">(</span><span class="n">chaser</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to set the local scale of.</td>
+</tr>
+</tbody></table>
+
+<p>Get the local scale of the given entity.</p>
+
+<h2 id="script-get_world_scale-entity-entity">Script.get_world_scale(Entity entity)</h2>
+
+<p><code class="prettyprint">Vector3 Script.get_world_scale(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="kd">local</span> <span class="n">chaserWScale</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">get_world_scale</span><span class="p">(</span><span class="n">chaser</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to get the world scale of.</td>
+</tr>
+</tbody></table>
+
+<p>Get the world scale of the given entity.</p>
+
+<h2 id="script-set_local_scale-entity-entity-vector3-scale">Script.set_local_scale(Entity entity, Vector3 scale)</h2>
+
+<p><code class="prettyprint">Vector3 Script.set_local_scale(Entity entity, Vector3 scale)</code></p>
+<pre class="highlight lua"><code><span class="n">Script</span><span class="p">.</span><span class="n">set_local_scale</span><span class="p">(</span><span class="n">trigger_area</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">(</span><span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">));</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to set the local scale of.</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Vector3</td>
+<td>New scale to set.</td>
+</tr>
+</tbody></table>
+
+<p>Set the local scale of the given entity.</p>
+
+<h2 id="script-get_local_orientation-entity-entity">Script.get_local_orientation(Entity entity)</h2>
+
+<p><code class="prettyprint">Quaternion Script.get_local_orientation(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="n">localOrientation</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">get_local_orientation</span><span class="p">(</span><span class="n">player</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to set the local orientation of.</td>
+</tr>
+</tbody></table>
+
+<p>Get the local orientation of the given entity.</p>
+
+<h2 id="script-get_world_orientation-entity-entity">Script.get_world_orientation(Entity entity)</h2>
+
+<p><code class="prettyprint">Quaternion Script.get_world_orientation(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="n">worldOrientation</span> <span class="o">=</span> <span class="n">Script</span><span class="p">.</span><span class="n">get_world_orientation</span><span class="p">(</span><span class="n">player</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to get the world orientation of.</td>
+</tr>
+</tbody></table>
+
+<p>Get the world orientation of the given entity.</p>
+
+<h2 id="script-set_local_orientation-entity-entity-quaternion-orientation">Script.set_local_orientation(Entity entity, Quaternion orientation)</h2>
+
+<p><code class="prettyprint">Quaternion Script.set_local_orientation(Entity entity, Quaternion orientation)</code></p>
+<pre class="highlight lua"><code><span class="n">Script</span><span class="p">.</span><span class="n">set_local_translation</span><span class="p">(</span><span class="n">ent</span><span class="p">,</span> <span class="n">myRot</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to set the local orientation of.</td>
+</tr>
+<tr>
+<td>orientation</td>
+<td>Quaternion</td>
+<td>New orientation to set.</td>
+</tr>
+</tbody></table>
+
+<p>Set the local orientation of the given entity.</p>
+
+<h2 id="script-destroy_entity-entity-entity">Script.destroy_entity(Entity entity)</h2>
+
+<p><code class="prettyprint">Script.destroy_entity(Entity entity)</code></p>
+<pre class="highlight lua"><code><span class="n">Script</span><span class="p">.</span><span class="n">destroy_entity</span><span class="p">(</span><span class="n">guiStartPlayButton</span><span class="p">)</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity</td>
+<td>Entity</td>
+<td>Entity to destroy.</td>
+</tr>
+</tbody></table>
+
+<p>Send a message to all systems, telling them to destroy the given entity.</p>
+
+<h2 id="script-set_material_parameter-string-materialresourcefilepath-string-parametername-string-parametertype-any-data">Script.set_material_parameter(string materialResourceFilePath, string parameterName, string parameterType, any data)</h2>
+
+<p><code class="prettyprint">Script.set_material_parameter(string materialResourceFilePath, string parameterName, string parameterType, any data)</code></p>
+<pre class="highlight lua"><code><span class="n">Script</span><span class="p">.</span><span class="n">set_material_parameter</span><span class="p">(</span><span class="s2">"colour.material"</span><span class="p">,</span> <span class="s2">"u_colour"</span><span class="p">,</span> <span class="s2">"vec4"</span><span class="p">,</span> <span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">))</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>materialResourceFilePath</td>
+<td>string</td>
+<td>Material to set parameter of.</td>
+</tr>
+<tr>
+<td>parameterName</td>
+<td>string</td>
+<td>Parameter in material to manipulate.</td>
+</tr>
+<tr>
+<td>parameterType</td>
+<td>string</td>
+<td>Type of parameter (vec4, int, mat4, float).</td>
+</tr>
+<tr>
+<td>data</td>
+<td>any</td>
+<td>New data to give to parameter.</td>
+</tr>
+</tbody></table>
+
+<p>Set the value of a parameter in a given material.</p>
+
+<h2 id="script-quit">Script.quit()</h2>
+
+<p><code class="prettyprint">Script.quit()</code></p>
+<pre class="highlight lua"><code><span class="n">Script</span><span class="p">.</span><span class="n">quit</span><span class="p">()</span> <span class="c1">-- Shutdown everything </span>
+</code></pre>
+
+<p>Sends a quit message to all systems, telling them to shutdown. Shuts down the engine.</p>
+
+<h2 id="script-set_pause-bool-shouldpause">Script.set_pause(bool shouldPause)</h2>
+<pre class="highlight lua"><code><span class="n">Script</span><span class="p">.</span><span class="n">set_pause</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> <span class="c1">-- Pause game</span>
+<span class="n">Script</span><span class="p">.</span><span class="n">set_pause</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span> <span class="c1">-- Unpause game</span>
+</code></pre>
+
+<p><code class="prettyprint">Script.set_pause(bool shouldPause)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>shouldPause</td>
+<td>bool</td>
+<td>true to pause, false to unpause.</td>
+</tr>
+</tbody></table>
+
+<p>Systems will receive pause message, up to them whether they should pause or not.</p>
+
+          <h1 id="gt-input">&gt; Input</h1>
+
+<h2 id="input-is_key_pressed-string-keyname">Input.is_key_pressed(string keyName)</h2>
+<pre class="highlight lua"><code><span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">is_key_pressed</span><span class="p">(</span><span class="s2">"w"</span><span class="p">))</span> <span class="k">then</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">"W pressed"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><code class="prettyprint">bool Input.is_key_pressed(string keyName)</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>keyName</td>
+<td>string</td>
+<td>Name of key to check if pressed.</td>
+</tr>
+</tbody></table>
+
+<p>Returns true if the given key is pressed and false otherwise.</p>
+
+<h2 id="input-get_mouse_delta_xy">Input.get_mouse_delta_xy()</h2>
+<pre class="highlight lua"><code><span class="n">dX</span><span class="p">,</span> <span class="n">dY</span> <span class="o">=</span> <span class="n">Input</span><span class="p">.</span><span class="n">get_mouse_delta_xy</span><span class="p">()</span>
+</code></pre>
+
+<p><code class="prettyprint">deltaX, deltaY Input.get_mouse_delta_xy()</code></p>
+
+<p>Returns the amount (in pixels) the mouse has moved since the last frame.</p>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="lua">Lua</a>
           </div>
       </div>
     </div>
