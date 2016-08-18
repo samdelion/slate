@@ -23,31 +23,33 @@ under the License.
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #393939;
+$nav-bg: #f7f7f7;
 $examples-bg: #393939;
 $code-bg: #292929;
 $code-annotation-bg: #1c1c1c;
-$nav-subitem-bg: #262626;
-$nav-active-bg: #2467af;
+$nav-subitem-bg: #d5fbff;
+$nav-active-bg: #74d2d9;
 $lang-select-border: #000;
 $lang-select-bg: #222;
 $lang-select-active-bg: $examples-bg; // feel free to change this to blue or something
 $lang-select-pressed-bg: #111; // color of language tab bg when mouse is pressed
-$main-bg: #eaf2f6;
-$aside-notice-bg: #8fbcd4;
-$aside-warning-bg: #c97a7e;
-$aside-success-bg: #6ac174;
+$main-bg: #eceef1; // main (non-header) background
+$aside-notice-bg: #70d1da;
+$aside-warning-bg: #ff7373;
+$aside-success-bg: #77ea85;
 $search-notice-bg: #c97a7e;
 
 
 // TEXT COLORS
 ////////////////////
 $main-text: #333; // main content text color
-$nav-text: #fff;
-$nav-active-text: #fff;
+$nav-text: #333; // color of unselected nav item in toc
+$nav-active-text: #f7f7f7;  // color selected nav item in toc
 $lang-select-text: #fff; // color of unselected language tab text
 $lang-select-active-text: #fff; // color of selected language tab text
 $lang-select-pressed-text: #fff; // color of language tab text when mouse is pressed
+$search-highlight: #F1D32F;
+$search-highlight-border: #F7E633;
 
 
 // SIZES
@@ -86,12 +88,12 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 
 // OTHER
 ////////////////////
-$nav-active-shadow: #000;
-$nav-footer-border-color: #666;
-$nav-embossed-border-top: #000;
-$nav-embossed-border-bottom: #939393;
-$main-embossed-text-shadow: 0px 1px 0px #fff;
-$search-box-border-color: #666;
+$nav-active-shadow: $nav-active-bg; // shadow at bottom of active toc item
+$nav-footer-border-color: #ccc; // Dashed line at bottom of toc
+$nav-embossed-border-top: #d5fbff;
+$nav-embossed-border-bottom: #d5fbff;
+$main-embossed-text-shadow: 0px 1px 0px #f7f7f7;
+$search-box-border-color: #f7f7f7;
 
 
 ////////////////////////////////////////////////////////////////////////////////

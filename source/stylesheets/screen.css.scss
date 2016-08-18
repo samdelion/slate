@@ -48,8 +48,8 @@ html, body {
 
 @mixin embossed-bg {
   background:
-    linear-gradient(to bottom, rgba(#000, 0.2), rgba(#000, 0) 8px),
-    linear-gradient(to top, rgba(#000, 0.2), rgba(#000, 0) 8px),
+    linear-gradient(to bottom, rgba($nav-embossed-border-top, 0.2), rgba($nav-embossed-border-top, 0) 8px),
+    linear-gradient(to top, rgba($nav-embossed-border-top, 0.2), rgba($nav-embossed-border-top, 0) 8px),
     linear-gradient(to bottom, rgba($nav-embossed-border-top, 1), rgba($nav-embossed-border-top, 0) 1.5px),
     linear-gradient(to top, rgba($nav-embossed-border-bottom, 1), rgba($nav-embossed-border-bottom, 0) 1.5px),
     $nav-subitem-bg;
@@ -68,7 +68,11 @@ html, body {
   width: $nav-width;
   background-color: $nav-bg;
   font-size: 13px;
-  font-weight: bold;
+  // font-weight: bold;
+
+  .tocify {
+    margin-top: 1em;
+  }
 
   // language selector for mobile devices
   .lang-selector {
@@ -87,6 +91,8 @@ html, body {
 
   &>.search {
     position: relative;
+    border-top: 1px dashed $nav-footer-border-color;
+    border-bottom: 1px dashed $nav-footer-border-color;
 
     input {
       background: $nav-bg;
@@ -166,9 +172,9 @@ html, body {
 
   li {
     color: $nav-text;
-    transition-property: background;
+    transition-property: background, box-shadow;
     transition-timing-function: linear;
-    transition-duration: 230ms;
+    transition-duration: 0ms;
   }
 
   // This is the currently selected ToC entry
@@ -358,10 +364,10 @@ html, body {
     font-size: 30px;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px dashed #ccc;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
-    border-top: 1px solid #ddd;
+    border-top: 1px dashed #ddd;
     background-image: linear-gradient(to bottom, #fff, #f9f9f9);
   }
 
@@ -375,7 +381,7 @@ html, body {
     font-size: 20px;
     margin-top: 4em;
     margin-bottom: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px dashed #ccc;
     padding-top: 1.2em;
     padding-bottom: 1.2em;
     background-image: linear-gradient(to bottom, rgba(#fff, 0.4), rgba(#fff, 0));
@@ -470,7 +476,8 @@ html, body {
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
-    text-shadow: 0 1px 0 lighten($aside-notice-bg, 15%);
+    text-shadow: 0 1px 0 darken($aside-notice-bg, 5%);
+    // text-shadow: none;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
@@ -478,12 +485,14 @@ html, body {
 
     &.warning {
       background-color: $aside-warning-bg;
-      text-shadow: 0 1px 0 lighten($aside-warning-bg, 15%);
+      text-shadow: 0 1px 0 darken($aside-warning-bg, 5%);
+      // text-shadow: none;
     }
 
     &.success {
       background-color: $aside-success-bg;
-      text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
+      text-shadow: 0 1px 0 darken($aside-success-bg, 5%);
+      // text-shadow: none;
     }
   }
 
@@ -509,9 +518,9 @@ html, body {
     padding: 2px;
     margin: -2px;
     border-radius: 4px;
-    border: 1px solid #F7E633;
-    text-shadow: 1px 1px 0 #666;
-    background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
+    border: 1px solid $search-highlight-border;
+    text-shadow: none;
+    background: linear-gradient(to top left, $search-highlight-border 0%, $search-highlight 100%);
   }
 }
 
